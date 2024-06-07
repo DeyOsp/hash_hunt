@@ -19,7 +19,7 @@ Para instalar y ejecutar Hash Hunt en tu máquina local, sigue estos pasos:
 1. Clona el repositorio:
 
     ```sh
-    git clone https://github.com/DeymerOspina/hash_hunt.git
+    git clone https://github.com/DeymerOspina/hash-hunt.git
     ```
 
 2. Navega al directorio del proyecto:
@@ -72,5 +72,5 @@ Las contribuciones son bienvenidas. Si deseas contribuir a Hash Hunt, por favor,
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo `LICENSE` para obtener más detalles.
+Este proyecto está licenciado bajo la Licencia BSD 3-Clause. Consulta el archivo `LICENSE` para obtener más detalles.
 
