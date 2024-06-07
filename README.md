@@ -2,7 +2,7 @@
 
 ## Descripción
 
-**Hash Hunt** es una potente herramienta diseñada para la creación, gestión y búsqueda de diccionarios de números hasheados. Desarrollada en Python, esta aplicación permite a los usuarios generar diccionarios de números y sus correspondientes hashes, proporcionando una manera eficiente de buscar y verificar hashes utilizando una contraseña numérica.
+**Hash Hunt** es una herramienta diseñada para la creación, gestión y búsqueda de diccionarios de números hasheados. Desarrollada en Python, esta aplicación permite a los usuarios generar diccionarios de números y sus correspondientes hashes, proporcionando una manera eficiente de buscar y verificar hashes utilizando una contraseña numérica.
 
 ## Características
 
