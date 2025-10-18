@@ -118,72 +118,65 @@ Opcion: """
             )
         )
 
-        if menu == 1:
-            archivos()
-            continue
+        match menu:
+            case 1:
+                archivos()
+                continue
+            case 2:
+                nombreArchivo = str(input("\nNombre del archivo: "))
+                opcion = int(input("\nQue longitud tiene la contraseña: "))
 
-        elif menu == 2:
-            nombreArchivo = str(input("\nNombre del archivo: "))
+                list_numbers = [i for i in range(1, opcion + 1)]
 
-            opcion = int(input("\nQue longitud tiene la contraseña: "))
+                print(f"\nLista de los numeros para permutar: {list_numbers}")
 
-            list_numbers = [i for i in range(1, opcion + 1)]
+                regex = itertools.permutations(list_numbers)
 
-            print(f"\nLista de los numeros para permutar: {list_numbers}")
+                print(f"\n[+] Permutando...\n")
 
-            regex = itertools.permutations(list_numbers)
+                for i in regex:
+                    letra_i = i
+                    time.sleep(0.05)
+                    texto = "".join(str(x) for x in letra_i)
 
-            print(f"\n[+] Permutando...\n")
+                    actualizar(texto)
 
-            for i in regex:
-                letra_i = i
-                time.sleep(0.05)
-                texto = "".join(str(x) for x in letra_i)
+                numero = 1
 
-                actualizar(texto)
+                for i in range(len(list_numbers)):
+                    incremento = int(i) + 1
+                    numero *= incremento
 
-            numero = 1
+                print(f"\nSerian {numero} permutaciones\n")
+                print(
+                    f"[+] Se a creado el archivo {nombreArchivo}.txt y se han guardado las permutaciones"
+                )
+                print(f"\n[-] Saliendo...\n")
+                break
+            case 3:
+                createhash()
+                break
+            case 4:
+                hash_hunt()
+                break
+            case 5:
+                arhivoEliminar = str(input("\nQue archivo deseas eliminar: "))
+                os.system(f"rm Archivos/{arhivoEliminar}.txt")
+                print(f"\n[-] Se elimino el archivo {arhivoEliminar}.txt")
+                break
+            case 6:
+                print("\n[-] Saliendo...")
+                break
+            case 7:
+                nombreArchivo = str(input("\nNombre del archivo: "))
 
-            for i in range(len(list_numbers)):
-                incremento = int(i) + 1
-                numero *= incremento
-
-            print(f"\nSerian {numero} permutaciones\n")
-            print(
-                f"[+] Se a creado el archivo {nombreArchivo}.txt y se han guardado las permutaciones"
-            )
-            print(f"\n[-] Saliendo...\n")
-            break
-
-        elif menu == 3:
-            createhash()
-            break
-
-        elif menu == 4:
-            hash_hunt()
-            break
-
-        elif menu == 5:
-            arhivoEliminar = str(input("\nQue archivo deseas eliminar: "))
-            os.system(f"rm Archivos/{arhivoEliminar}.txt")
-            print(f"\n[-] Se elimino el archivo {arhivoEliminar}.txt")
-            break
-
-        elif menu == 6:
-            print("\n[-] Saliendo...")
-            break
-
-        elif menu == 7:
-            nombreArchivo = str(input("\nNombre del archivo: "))
-
-            for i in range(100000000):
-                refill_number = str(i).zfill(8)
-                actualizar(refill_number)
-            break
-
-        else:
-            print("\nOpcion incorrecta. Selecciona una opcion correcta.")
-            continue
+                for i in range(100000000):
+                    refill_number = str(i).zfill(8)
+                    actualizar(refill_number)
+                break
+            case _:
+                print("\nOpcion incorrecta. Selecciona una opcion correcta.")
+                continue
 
     except ValueError:
         print("\nNo se permiten letras.")
