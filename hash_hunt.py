@@ -4,39 +4,48 @@ import os
 import hashlib
 import pyperclip
 
+
 def escribir(texto):
     my_file = open(f"{os.getcwd()}\\Archivos\\{nombreArchivo}.txt", "w")
     my_file.write(texto)
     my_file.close()
+
 
 def leer():
     my_file = open(f"{os.getcwd()}\\Archivos\\{nombreArchivo}.txt", "r")
     print(my_file.read())
     my_file.close()
 
+
 def actualizar(texto):
     my_file = open(f"{os.getcwd()}\\Archivos\\{nombreArchivo}.txt", "a")
     my_file.write(f"{texto}\n")
     my_file.close()
+
 
 def archivos():
     print("\n====Archivos====\n")
     os.system("ls Archivos -1")
     print("\n================\n")
 
+
 def createhash():
     hashing = input("\nConvertir a hash: ")
 
-    salida = hashlib.sha1(hashing.encode('utf-8')).hexdigest()
+    salida = hashlib.sha1(hashing.encode("utf-8")).hexdigest()
 
     print(f"\n{salida} es el hash para {hashing}\n")
 
-    option = int(input("""¿Deseas copiar el hash en tu portapapeles?
+    option = int(
+        input(
+            """¿Deseas copiar el hash en tu portapapeles?
 
 1. Sí
 2. No
 
-Opcion: """))
+Opcion: """
+        )
+    )
 
     if option == 1:
         pyperclip.copy(salida)
@@ -54,20 +63,24 @@ def hash_hunt():
     with open(f"{os.getcwd()}\\Archivos\\{diccionario}.txt", "r") as file:
         for i in file:
             i = i.strip()
-            numeroshashing = hashlib.sha1(i.encode('utf-8')).hexdigest()
+            numeroshashing = hashlib.sha1(i.encode("utf-8")).hexdigest()
             print(f"{numeroshashing} ->", i)
             time.sleep(0.05)
-            
+
             if hashnumber == numeroshashing:
                 print(f"\nEl hash {hashnumber} corresponde a la contraseña: {i}")
                 break
 
-    option = int(input("""¿Deseas copiar la contraseña en tu portapapeles?
+    option = int(
+        input(
+            """¿Deseas copiar la contraseña en tu portapapeles?
 
 1. Sí
 2. No
 
-Opcion: """))
+Opcion: """
+        )
+    )
 
     if option == 1:
         pyperclip.copy(i)
@@ -75,8 +88,9 @@ Opcion: """))
     else:
         print("\n[-] No se copio la contraseña en tu papelera.")
 
-    
-print("""
+
+print(
+    """
                      
 ██╗  ██╗ █████╗ ███████╗██╗  ██╗    ██╗  ██╗██╗   ██╗███╗   ██╗██╗████████╗
 ██║  ██║██╔══██╗██╔════╝██║  ██║    ██║  ██║██║   ██║████╗  ██║██║╚══██╔══╝
@@ -85,11 +99,14 @@ print("""
 ██║  ██║██║  ██║███████║██║  ██║    ██║  ██║╚██████╔╝██║ ╚████║██║   ██║   
 ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝   
      
-""")
+"""
+)
 
 while True:
     try:
-        menu = int(input("""1. Ver arhivos
+        menu = int(
+            input(
+                """1. Ver arhivos
 2. Crear diccionario
 3. Crear hash
 4. Brute Force (Busqueda de Hash)
@@ -97,7 +114,9 @@ while True:
 6. Salir
 7. Diccionario de rangos
                      
-Opcion: """))
+Opcion: """
+            )
+        )
 
         if menu == 1:
             archivos()
@@ -119,7 +138,7 @@ Opcion: """))
             for i in regex:
                 letra_i = i
                 time.sleep(0.05)
-                texto = ''.join(str(x) for x in letra_i)
+                texto = "".join(str(x) for x in letra_i)
 
                 actualizar(texto)
 
@@ -130,7 +149,9 @@ Opcion: """))
                 numero *= incremento
 
             print(f"\nSerian {numero} permutaciones\n")
-            print(f"[+] Se a creado el archivo {nombreArchivo}.txt y se han guardado las permutaciones")
+            print(
+                f"[+] Se a creado el archivo {nombreArchivo}.txt y se han guardado las permutaciones"
+            )
             print(f"\n[-] Saliendo...\n")
             break
 
@@ -138,7 +159,7 @@ Opcion: """))
             createhash()
             break
 
-        elif menu == 4: 
+        elif menu == 4:
             hash_hunt()
             break
 
