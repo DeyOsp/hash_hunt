@@ -4,58 +4,11 @@ import os
 import hashlib
 import pyperclip
 
-
-def escribir(texto):
-    my_file = open(f"{os.getcwd()}\\Archivos\\{nombreArchivo}.txt", "w")
-    my_file.write(texto)
-    my_file.close()
-
-
-def leer():
-    my_file = open(f"{os.getcwd()}\\Archivos\\{nombreArchivo}.txt", "r")
-    print(my_file.read())
-    my_file.close()
-
-
-def actualizar(texto):
-    my_file = open(f"{os.getcwd()}\\Archivos\\{nombreArchivo}.txt", "a")
-    my_file.write(f"{texto}\n")
-    my_file.close()
-
-
-def archivos():
-    print("\n====Archivos====\n")
-    os.system("ls Archivos -1")
-    print("\n================\n")
-
-
-def createhash():
-    hashing = input("\nConvertir a hash: ")
-
-    salida = hashlib.sha1(hashing.encode("utf-8")).hexdigest()
-
-    print(f"\n{salida} es el hash para {hashing}\n")
-
-    option = int(
-        input(
-            """¿Deseas copiar el hash en tu portapapeles?
-
-1. Sí
-2. No
-
-Opcion: """
-        )
-    )
-
-    if option == 1:
-        pyperclip.copy(salida)
-        print("\n[+] El hash se ha guardado en tu portapapeles correctamente.")
-    else:
-        print("\n[-] No se copio el hash en tu papelera.")
+from functions_files import *
 
 
 def hash_hunt():
-    hashnumber = input("\nNumero hash: ")
+    hash_number = input("\nNumero hash: ")
     diccionario = input("\nEscribe el nombre del diccionario que vas a usar: ")
 
     print("\n[+] Buscando...\n")
@@ -63,12 +16,12 @@ def hash_hunt():
     with open(f"{os.getcwd()}\\Archivos\\{diccionario}.txt", "r") as file:
         for i in file:
             i = i.strip()
-            numeroshashing = hashlib.sha1(i.encode("utf-8")).hexdigest()
-            print(f"{numeroshashing} ->", i)
+            number_hash = hashlib.sha1(i.encode("utf-8")).hexdigest()
+            print(f"{number_hash} ->", i)
             time.sleep(0.05)
 
-            if hashnumber == numeroshashing:
-                print(f"\nEl hash {hashnumber} corresponde a la contraseña: {i}")
+            if hash_number == number_hash:
+                print(f"\nEl hash {hash_number} corresponde a la contraseña: {i}")
                 break
 
     option = int(
@@ -78,7 +31,7 @@ def hash_hunt():
 1. Sí
 2. No
 
-Opcion: """
+Opción: """
         )
     )
 
@@ -91,14 +44,14 @@ Opcion: """
 
 print(
     """
-                     
+
 ██╗  ██╗ █████╗ ███████╗██╗  ██╗    ██╗  ██╗██╗   ██╗███╗   ██╗██╗████████╗
 ██║  ██║██╔══██╗██╔════╝██║  ██║    ██║  ██║██║   ██║████╗  ██║██║╚══██╔══╝
 ███████║███████║███████╗███████║    ███████║██║   ██║██╔██╗ ██║██║   ██║   
 ██╔══██║██╔══██║╚════██║██╔══██║    ██╔══██║██║   ██║██║╚██╗██║██║   ██║   
 ██║  ██║██║  ██║███████║██║  ██║    ██║  ██║╚██████╔╝██║ ╚████║██║   ██║   
 ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝   
-     
+
 """
 )
 
@@ -106,15 +59,15 @@ while True:
     try:
         menu = int(
             input(
-                """1. Ver arhivos
+                """1. Ver archivos
 2. Crear diccionario
 3. Crear hash
-4. Brute Force (Busqueda de Hash)
+4. Brute Force (Búsqueda de Hash)
 5. Eliminar archivo
 6. Salir
 7. Diccionario de rangos
-                     
-Opcion: """
+
+Opción: """
             )
         )
 
@@ -123,12 +76,12 @@ Opcion: """
                 archivos()
                 continue
             case 2:
-                nombreArchivo = str(input("\nNombre del archivo: "))
-                opcion = int(input("\nQue longitud tiene la contraseña: "))
+                name_file = str(input("\nNombre del archivo: "))
+                option = int(input("\nQue longitud tiene la contraseña: "))
 
-                list_numbers = [i for i in range(1, opcion + 1)]
+                list_numbers = [i for i in range(1, option + 1)]
 
-                print(f"\nLista de los numeros para permutar: {list_numbers}")
+                print(f"\nLista de los números para permutar: {list_numbers}")
 
                 regex = itertools.permutations(list_numbers)
 
@@ -139,7 +92,7 @@ Opcion: """
                     time.sleep(0.05)
                     texto = "".join(str(x) for x in letra_i)
 
-                    actualizar(texto)
+                    actualizar(texto, name_file)
 
                 numero = 1
 
@@ -149,36 +102,39 @@ Opcion: """
 
                 print(f"\nSerian {numero} permutaciones\n")
                 print(
-                    f"[+] Se a creado el archivo {nombreArchivo}.txt y se han guardado las permutaciones"
+                    f"[+] Se a creado el archivo {name_file}.txt y se han guardado las permutaciones"
                 )
                 print(f"\n[-] Saliendo...\n")
                 break
             case 3:
-                createhash()
+                create_hash()
                 break
             case 4:
                 hash_hunt()
                 break
             case 5:
-                arhivoEliminar = str(input("\nQue archivo deseas eliminar: "))
-                os.system(f"rm Archivos/{arhivoEliminar}.txt")
-                print(f"\n[-] Se elimino el archivo {arhivoEliminar}.txt")
+                archivoEliminar = str(input("\nQue archivo deseas eliminar: "))
+                os.system(f"rm Archivos/{archivoEliminar}.txt")
+                print(f"\n[-] Se elimino el archivo {archivoEliminar}.txt")
                 break
             case 6:
                 print("\n[-] Saliendo...")
                 break
             case 7:
-                nombreArchivo = str(input("\nNombre del archivo: "))
+                name_file = str(input("\nNombre del archivo: "))
 
                 for i in range(100000000):
                     refill_number = str(i).zfill(8)
-                    actualizar(refill_number)
+                    actualizar(refill_number, name_file)
                 break
             case _:
-                print("\nOpcion incorrecta. Selecciona una opcion correcta.")
+                print("\nOpción incorrecta. Selecciona una opción correcta.")
                 continue
 
     except ValueError:
         print("\nNo se permiten letras.")
         print("\n[-] Saliendo...")
         break
+
+if __name__ == "__main__":
+    hash_hunt()
